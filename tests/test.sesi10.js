@@ -1,18 +1,23 @@
 const { Builder, By, until } = require('selenium-webdriver');
 const assert = require('assert');
-const chrome = require('selenium-webdriver/firefox');
+const chrome = require('selenium-webdriver/chrome'); // ganti ke chrome di sini
 
 describe('Google Search Test', function () {
     let driver;
 
-//Login
+    // Hook before untuk setup driver (tugas sesi 1o)
+    before(async function () {
+        // Setup driver hanya sekali sebelum semua test dijalankan
+        driver = await new Builder().forBrowser('chrome').build();
+    });
+
+    // Hook after untuk quit driver setelah semua test selesai
+    after(async function () {
+        await driver.quit();
+    });
+
+    // Test pertama: Visit SauceDemo dan cek page title
     it('Visit SauceDemo dan cek page title', async function () {
-        options = new chrome.Options();
-        driver = await new Builder().forBrowser('firefox').build();
-        
-        // driver = await new Builder().forBrowser('chrome').build();
-        //await driver.sleep(3000);
-        
         await driver.get('https://www.saucedemo.com');
         await driver.sleep(1000);
         const title = await driver.getTitle();
@@ -34,18 +39,17 @@ describe('Google Search Test', function () {
         await driver.sleep(2000)
     });
 
-    //Urutkan Produk dari Z-A
+    // Test kedua: Urutkan Produk dari Z-A
     it('Urutkan produk dari Z - A', async function () {
         let buttonOption = await driver.findElement(By.css('[data-test="product-sort-container"]'))
         await buttonOption.click();
         await driver.sleep(1500); 
         let option = await driver.findElement(By.css('option[value="za"]'))
         await option.click();
-        await driver.sleep(2000)
-      
+        await driver.sleep(2000);
     });
 
-    //logout
+    // Test ketiga: Logout Aplikasi
     it('Logout Aplikasi', async function () {
         let menuButton = await driver.findElement(By.id('react-burger-menu-btn'));
         await menuButton.click();
@@ -54,6 +58,6 @@ describe('Google Search Test', function () {
         let logoutClick = await driver.findElement(By.id('logout_sidebar_link'));
         await logoutClick.click();
         await driver.sleep(2000)
-        await driver.quit();
     })
-})
+    
+});
