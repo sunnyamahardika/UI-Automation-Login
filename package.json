@@ -1,11 +1,11 @@
 {
-    "name": "ui-automated-sesi10",
+    "name": "ui-automated-sesi9dan10",
     "version": "1.0.0",
     "description": "Selenium WebDriver tests using Mocha with Mochawesome reports",
     "scripts": {
         "tests": "mocha tests --recursive --timeout 60000",
-        "test-sesi-9": "mocha tests/sesi_9/test.sesi9.js --recursive --timeout 60000",
-        "test-sesi-10": "mocha tests/sesi_10/test.sesi10.js --recursive --timeout 60000",
+        "test-sesi-9": "mocha tests/test.sesi9.js --recursive --timeout 60000",
+        "test-sesi-10": "mocha tests/test.sesi10.js --recursive --timeout 60000",
         "test-parallel": "mocha tests --parallel --recursive --timeout 60000",
         "test-pertama": "mocha tests --grep 'Pertama' --recursive --timeout 60000",
         "jalanin-mochawesome": "mocha tests --recursive --timeout 60000 --reporter mochawesome",
